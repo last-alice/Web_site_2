@@ -3,15 +3,16 @@
 /*header*/
 /*smart phone*/
     .imglogo {
-        text-align: center;
-    }
-    .imglogo img {
-        width: 100px;
+        width: 200px;
         height: 50px;
+        margin: 10px;
+        margin-left: auto;
+        margin-right: auto;
     }
     ul {
         list-style-type: none;
         text-align: center;
+        margin: 20px;
     }
     ul a:hover {
         color: #0bd;
@@ -33,7 +34,7 @@
         list-style-type: none;
         width: 350px;
         margin-left: auto;
-        padding-top: 5px;
+        margin: 5px;
     }
     ul a:hover {
         color: #0bd;
@@ -79,13 +80,13 @@ footer p {
         height: 100vh;
     }
     .index_h2 {
-        margin: 30px;
+        margin: 40px 0;
         text-align: center;
         font-size: 2rem;
     }
     .index_p {
         text-align: center;
-        margin: 5px;
+        margin: 20px 0;
     }
     .button_0 {
         font-size: 1.2rem;
@@ -216,18 +217,26 @@ footer p {
 }
 /*smart phone*/
     .div_menu {
-        height: auto;
+        height: 100vh;
     }
     .menu_h2 {
-        font-size: 1.4rem;
+        margin-top: 50px;
+        font-size: 1.8rem;
+    }
+    .menu_p {
+        text-align: center;
+        margin: 50px 15px;
+    }
+    .menu_p p {
+        text-align: left;
     }
     .picture_container img {
         width: 350px;
     }
 /*PC*/
 @media (min-width: 415px) {
-    .div_menu {
-        height: 70vh;
+    .div_menu, .menu_h2, .menu_p {
+        height: 100vh;
         width: 100vw;
     }
     .menu_h2 {
@@ -295,12 +304,9 @@ footer p {
     .div_contact {
     height: 100vh;
     }
-    .div_contact_0 {
-    width: 100%;
-    height: 100vh;
-    }
     .contact_h2{
-    font-size: 1.4rem;
+    margin: 50px 0;
+    font-size: 1.8rem;
     }
 /*PC*/
 @media (min-width: 415px) {
