@@ -3,15 +3,15 @@
 /*header*/
 /*smart phone*/
     .imglogo {
-        width: 100%;
-        height: 100%;
         text-align: center;
+    }
+    .imglogo img {
+        width: 100px;
+        height: 50px;
     }
     ul {
         list-style-type: none;
-        margin: 0;
-        margin-right: 16vw;
-        justify-self: center;
+        text-align: center;
     }
     ul a:hover {
         color: #0bd;
@@ -72,45 +72,31 @@ footer p {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 0;
-    margin: 0 auto;
 }
 /*smart phone*/
     .div_index {
-        width: 100%;
+        width: 100vw;
         height: 100vh;
     }
     .index_h2 {
-        top: 8.995502248875562vh;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        padding: 2.6666666666666665vh;
-        margin-top: 17.991004497751124vh;
+        margin: 30px;
         text-align: center;
+        font-size: 2rem;
     }
     .index_p {
-        top: 35.98200899550225vh;
-        right: 0;
-        bottom: 0;
-        left: 0;
         text-align: center;
-        padding: 4vw;
+        margin: 5px;
     }
     .button_0 {
-        display: block;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
         font-size: 1.2rem;
         cursor: pointer;
         background-color: #13afe4;
         color: #ffffff;
         border-radius: 5px;
-        margin-bottom: 14.992503748125937vh;
+        margin: 30px 0;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
     .button_0:hover {
         background-color: #1099c7;
@@ -137,6 +123,9 @@ footer p {
         background-color: #13afe4;
         color: #ffffff;
         border-radius: 5px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
     .button_0:hover {
         background-color: #1099c7;
@@ -149,20 +138,18 @@ footer p {
     background-repeat: no-repeat;
     background-size: cover;
     height: 40vh;
-    padding: 0;
     width: 100vw;
 }
 /*2カラム書き直し*/
-
-@media ( min-width : 415px ) {
-    .news_h2 {
-        margin-top: 60px;
+/*smart phone*/
+    .div_news {
+        height: 300px;
     }
     .news_img {
-        width: 600px;
+        width: 100%;
+        height: 50%;
     }
     .time_news {
-        display: flex;
         flex-direction: column;
         text-align: center;
         background-color: #13afe4;
@@ -171,6 +158,7 @@ footer p {
         border-radius: 50%;
         -moz-border-radius: 50%;
         -webkit-border-radius: 50%;
+        margin: 0;
     }
     .time_news p {
         color: #ffffff;
@@ -180,8 +168,21 @@ footer p {
         margin: 1px 0;
     }
     .time_news_p {
-        border-bottom: 1px solid #fff;
         font-size: 1.5rem;
+        text-decoration: underline;
+    }
+    .all_colomns {
+        margin: 50px 0;
+    }
+    .news_h3 {
+        clear: right;
+    }
+@media ( min-width : 415px ) {
+    .news_h2 {
+        margin-top: 60px;
+    }
+    .news_img {
+        width: 600px;
     }
     .all_colomns {
         display: -webkit-flex;
@@ -212,21 +213,16 @@ footer p {
     background-repeat: no-repeat;
     background-blend-mode: screen;
     background-size: 100% 100vh;
-
-}/*smart phone*/
+}
+/*smart phone*/
     .div_menu {
-        height: 100vh;
+        height: auto;
     }
     .menu_h2 {
         font-size: 1.4rem;
     }
-    .picture_container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-    }
-    .picture_a {
-        grid-column: 1;
-        grid-row: auto;
+    .picture_container img {
+        width: 350px;
     }
 /*PC*/
 @media (min-width: 415px) {
@@ -258,10 +254,6 @@ footer p {
         grid-template-rows: 300px 300px 300px;
         grid-gap: 50px;
         height: 800px;
-    }
-    .picture_container img {
-        width: 500px;
-        height: 300px;
     }
     .picture_a {
         grid-area: a;
@@ -377,5 +369,4 @@ footer p {
         height: 100%;
         padding-left: 75%; /* = height(高さ) ÷ width(横) × 100 */
     }
-/*google map消失が解消されたのに、backimg消失原因を探る*/
 }
