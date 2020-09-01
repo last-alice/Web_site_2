@@ -1,60 +1,21 @@
 @charset "UTF-8";
-
-/*header*/
-/*smart phone*/
-    .imglogo {
-        width: 200px;
-        height: 50px;
-        display: block;
-        margin: auto;
-    }
-    .div_index {
-        text-align: center;
-    }
-    ul {
-        list-style-type: none;
-        display: block;
-        margin: 20px 0;
-    }
-    ul a:hover {
-        color: #0bd;
-    }
-    li {
-        padding: 10px;
-        color: #3f312b;
-        display: inline-block;
-    }
-/*PC*/
-@media (min-width: 415px) {
-    .imglogo {
-        margin-left: 300px;
-        width: 300px;
-        height: 80px;
-        cursor: pointer;
-    }
-    ul {
-        list-style-type: none;
-        width: 350px;
-        margin-left: auto;
-    }
-    ul a:hover {
-        color: #0bd;
-    }
-    li {
-        display: inline-block;
-        padding: 5px 15px;
-        color: #3f312b;
-    }
-}
-
+/*General*/
 /*unity*/
+
+/*共通のスタイルは頭でまとめて定義しちゃう*/
+*{
+  font-style: normal;
+  font-weight: normal;
+  font-family: sans-serif;
+}
 html {
     font-size: 100%;
 }
-h2 {
-    text-align: center;
+h1{
+  color: #3f312b;
+}
+h2{
     color: #3f312b;
-    font-family: 'Philosopher', sans-serif;
 }
 h3 {
     color: #3f312b;
@@ -62,325 +23,581 @@ h3 {
 p {
     color: #3f312b;
 }
+a{
+  color:inherit;  /*リンクの色は親の色を継承*/
+  transition: all .3s ease; /*マウスホバーで色が変わる時少し時間をかけてアニメーションさせてみる*/
+}
+a:hover,a:focus{
+  color:#0bd;
+}
+ul,ol,li{
+  list-style: none;
+  /*paddingもliの中のaに指定した方がクリックしやすいのでpadding指定も外した*/
+}
+
+
+/*header*/
+/*smart phone*/
+
+/*  global header-----------------------------*/
+.global_header{
+  color: #3f312b;
+
+  padding: 1rem;
+  /*
+  同じ場所には共通のクラスを作って、cssも一箇所で制御できるようにする
+  同じクラスや構成でも例外の部分だけそれぞれの場所で記述する
+  */
+  background-color: #626063;
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+  background-size: cover;
+  background-position: center center;
+  height:100vh;
+  display: flex;
+  flex-direction: column; /*下で出てくるheader.global_headerのあまりの高さめいっぱいにページタイトルとかを広げたいのでflexにする*/
+}
+  .global_header h1{
+    width:12.5rem;  /*px指定は画面の大きさによって制御できないからremとかemとかの方が良い*/
+    margin:0 auto;  /*レイアウト的なスタイル指定はimgの親のh1で指定*/
+  }
+
+  .global_header h1 a{
+    display: block;
+  }
+
+    .imglogo {
+        display: block;
+        width:100%;
+        height:100%;
+        object-fit: contain;
+    }
+
+
+  .global_header ul{  /*43行目のulの指定は頭になにもついてないulだけなので、違う場所のulにも効くからheader.gloval_header内のulと指定 */
+    display:flex; /*子のliの並びをきれいに楽に制御するためにflex */
+    flex-direction: row;  /*ulの中でliが横並びになるようにflexにする。rowは横並びにするという指定*/
+    flex-wrap: nowrap;  /*折り返しさせない指定*/
+    font-size:1em;
+    justify-content: center;  /* ulの幅の中で中央に並べるための指定*/
+    text-align: center; /*text-alignはulで指定しておく（のちにliやa以外の要素が加わるかもしれないから */
+    margin: 1.5em 0 0 0;  /*h1との余白指定  */
+  }
+      .global_header li a{
+        padding: 1em; /*  paddingはliではなく、a自体にかける。でないとマウスが文字から少しでも外れたらクリックできなくなるので */
+        text-decoration: none;
+        display: block;
+      }
+      .global_header li a:hover,
+      .global_header li a:focus{
+        color:#0bd;
+      }
+  .global_header hgroup{  /*このhgroupを、header.global_headerの高さのうち、nav.global_navを除いた高さいっぱいに伸ばすためにflex-growを指定*/
+    flex-grow: 1;
+    display: flex;  /*さらにのびたhgroupの子要素を高さの中心に配置したいからhgroup自体もflex */
+    justify-content: center;  /*hgroupの子要素が高さ中心に揃うための指定*/
+    flex-direction:column;  /*子要素を縦並びにする指定*/
+    width:100%;
+  }
+    .page_title{  /*  menu_h2 とかに共通するので共通のクラス名を与えて一括指定  */
+      font-size:1.8rem;
+      text-align: center;
+      font-family: 'Philosopher', sans-serif;
+    }
+    .summary{ /*menu_pとかにあたるものを一括でスタイル指定するためのクラス名 */
+      font-size:1em;
+      margin:3em 0 0 0;
+    }
+
+  /*PC*/
+  @media (min-width: 415px) {
+    .global_header{
+    padding-top:2rem;
+      /*
+      pc版だけ上野paddingを広げてあげる
+      この時、padding:2rem 1rem 1rem 1remとせずに、
+      padding-topだけ追記する
+      大元の方で上以外のpaddingが変更されてもpx版をそれに追従させるため
+      */
+    }
+    .global_nav{
+      display: flex;  /*pc版で、このnavの子要素のh1とulをnavの最大幅の左右に振り分けて配置するためにflexにする*/
+      justify-content:space-between;  /*このspace-betweenが左右に配置（し要素が3ｯ以上ある時は残りは均等に配置する）指定*/
+      flex-direction: row;  /*子要素を横並びにする指定 */
+      flex-wrap: wrap;
+      align-items: center;  /*h1とulの高さが違うので、このglobal_navの高さ中心に揃える指定 */
+      width: 100%;  /* 100%指定してあくまでh1とulが左右に離れるようにする*/
+      max-width: 50em;  /*その代わり、画面を大きく広げた時の最大幅を決める*/
+      height: 10em;
+      margin-left: auto;  /*画面幅が50emを超えた時、左右の中央に配置するための左右マージンauto*/
+      margin-right: auto;
+    }
+    .global_header h1{
+      width:min(calc(12.5rem * 1.5),30vw);
+      /*h1は見た目的に高さより幅が重要なので幅方向を指定する。
+      ここでは、基本的には幅12.5remだけど、画面が狭くなり12.5remだとはみ出すようになるのでその場合は12.5rem以下で画面の30vwになるようにする。
+      画面を狭めるほど30vwという意味も小さくなるから、画面幅に追従して大きさが変わる*/
+      margin: 0; /*pcでは親要素の左右中心に配置しないのでmargin左右のautoは打ち消す*/
+    }
+    .global_header ul{
+      margin: 0;
+    }
+
+    .page_title{
+      font-size: 3.5rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .summary{
+      max-width:30em;
+      margin-left: auto;
+      margin-right: auto;
+    }
+      /*
+      indexのページタイトル下の文章にこれがかかってる
+      indexページの.summaryには個別で.index_pというクラスが当たってるから
+      そのクラスにmax-widthを打ち消す記述をする
+      */
+  } /*-------------------------pc */
+
+/*  ---------------------global header  */
+
+
+
+
+
+/*  main---------------------------------*/
+main{
+  margin: 0 auto; /* スマホで左右に余白を一文字分とる*/
+  padding: 0 1rem;
+}
+.main_inner{  /*上下のpaddingはインナーの方でつける（mainにつけちゃうとcontactのsnsの背景が下まで伸びない）*/
+  padding: 3rem 0;
+  width: 100%;
+}
+.item{
+  margin-bottom: 3rem;
+  /* newsの記事にしか使ってないクラスだけど、汎用性があり今後他のページに追加されることも考えられるので共通のものとしてここで定義する*/
+}
+
+
+
+
+@media (min-width:415px) {
+  .main_inner{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50rem; /*pcではinnerで最大幅を決める。これで画面幅が50remを切ってもmainの左右paddingがあるので左右の余白が保てる。
+    同時に、headerのh1、ulとの左右も揃う*/
+  }
+}
+
+
+/*  footer-------------------------------*/
 
 /*footer*/
 footer {
     background-color: #3f312b;
     width: 100%;
-    height: 60px;
     display: block;
+    /*子要素が一つしかないことと、意味的に高さは必要ないので高さ指定はしない。
+    またpx指定だと拡大縮小なんかで都合が悪いので使わない*/
 }
 footer p {
     color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-}
-/*index_main*/
-.div_index {
-    background-image: url(../img/main-bg.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-/*smart phone*/
-    .div_index {
-        width: 100vw;
-        height: 100vh;
-    }
-    .index_h2 {
-        margin: 40px 0;
-        text-align: center;
-        font-size: 2rem;
-    }
-    .index_p {
-        text-align: center;
-        margin: 20px 0;
-    }
-    .button_0 {
-        font-size: 1.2rem;
-        cursor: pointer;
-        background-color: #13afe4;
-        color: #ffffff;
-        border-radius: 5px;
-        margin: 30px 0;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .button_0:hover {
-        background-color: #1099c7;
-    }
-/*PC*/
-@media (min-width: 415px) {
-    .div_index {
-        width: 100%;
-        height: 100vh;
-    }
-    .index_h2 {
-        padding: 20px;
-        margin-top: 50px;
-        margin-bottom: 0;
-        text-align: center;
-        font-size: 4.8rem;
-    }
-    .index_p {
-        text-align: center;
-    }
-    .button_0 {
-        font-size: 1.2rem;
-        cursor: pointer;
-        background-color: #13afe4;
-        color: #ffffff;
-        border-radius: 5px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .button_0:hover {
-        background-color: #1099c7;
-    }
+    font-size: .8em;
+    text-align: center;
+    padding: 2rem 0;  /*この上下paddingでfooterの高さがきまる
+    footerで60pxと固定しちゃうと、p以外の要素が追加されるたびにその要素とfooterのheight、両方をいじらないといけなくなるので*/
 }
 
-/*news_body*/
-.div_news {
+
+
+/*  -------------個別ページ------------------------------- */
+
+
+/*  index------------------------------------*/
+.div_index{
+  text-align: center;
+  min-height:100vh;
+  overflow-y: visible;
+  background-image: url(../img/main-bg.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /*  mainをheader以下の中央に表示させる  */
+  display: flex;  /*  flex  */
+  flex-direction: column; /*  縦並びにする  */
+  justify-content: flex-start;  /*  全体の上部に並べる */
+}
+.global_header_index{
+  background: none;
+  height:auto;
+}
+.div_index main{
+  flex-grow: 1; /*  上で指定したflexでheader以下全ての領域を使うように伸ばす */
+
+  /*  mainの中身を上下の中央に寄せる */
+  display: flex;  /*  flexにする */
+  flex-direction: column; /*  縦並びにする  */
+  justify-content: center;  /*  mainの中身を中央に配置する */
+  min-height:22rem; /*  画面を縦に縮めた時の最小高さ  */
+}
+.index_h2{
+  font-size:2rem;
+  margin-top: 0;
+}
+.index_p{
+  width: auto;
+}
+
+
+@media  (min-width: 415px) {
+  .index_h2{
+    font-size:4.8rem;
+    margin-top:0;
+  }
+  .index_p{
+    max-width: initial;
+      /*
+      上で.summryとして一括でmax-widthを指定してるのをここで打ち消す
+      indexの.summaryには.index_pというクラスが当たってるのでそれを使う
+      */
+  }
+}
+
+
+.button_0{
+    font-size: 1.2rem;
+    background-color: #13afe4;
+    color: #ffffff;
+    border-radius: .25em;
+    margin: 2em auto;
+    display: block;
+    width:11em;
+    padding:.5em 0;
+    text-decoration: none;
+}
+.button_0:hover,
+.button_0:focus{
+  color:#fff; /*一番上でホバー色を定義しちゃったからここで打ち消し*/
+  background-color: #1099c7;
+}
+
+
+/* news-------------------------------------*/
+
+.main_colomns{
+  margin-bottom: 3rem;
+}
+.side_colomns{
+  font-size: .8rem;
+}
+
+
+.global_header_news{
+  background-blend-mode:normal;
+  background-position: top;
+    /*
+    newsのglobal_headerだけ背景の合成モードを通常にする
+    こういう個別ページでの打ち消しのために各ページ独自のクラス名
+    */
+
     background-image: url(../img/news-bg.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 40vh;
-    width: 100vw;
+    height: 40vh; /*ここはほかのページと違って40vhの高さ指定。こうやって高さが変わっても、global_headerをflexにしてhgroupの高さが伸び縮みするようにしてるから
+    この40vh以外に指定しなくてもよい */
 }
-/*2カラム書き直し*/
-/*smart phone*/
-    .div_news {
-        height: 300px;
-    }
-    .news_img {
-        width: 100%;
-        height: 50%;
-    }
-    .time_news {
-        flex-direction: column;
-        text-align: center;
-        background-color: #13afe4;
-        height: 100px;
-        width: 100px;
-        border-radius: 50%;
-        -moz-border-radius: 50%;
-        -webkit-border-radius: 50%;
-        margin: 0;
-    }
-    .time_news p {
-        color: #ffffff;
-        -webkit-transform: translateY(50%);
-        transform: translateY(50%);
-        display: inline-block;
-        margin: 1px 0;
-    }
-    .time_news_p {
-        font-size: 1.5rem;
-        text-decoration: underline;
-    }
-    .all_colomns {
-        margin: 50px 0;
-    }
-    .news_h3 {
-        clear: right;
-    }
-@media ( min-width : 415px ) {
-    .news_h2 {
-        margin-top: 60px;
-    }
-    .news_img {
-        width: 600px;
-    }
-    .all_colomns {
-        display: -webkit-flex;
-        display: flex;
-        width: 800px;
-        margin: 50px 100px;
-        -webkit-flex: 1;
-        flex: 1;
-    }
-    .main_colomns, .side_colomns {
-        padding: 2%;
-    }
-    .main_colomns {
-        width: 750px;
-    }
-    .side_colomns {
-        width: 350px;
-    }
-    .side_colomns li {
-        display: list-item;
-        text-transform: uppercase;
-    }
+.item_header h1{
+  font-size: 1.5em;
+  line-height: 1.2;
+}
+.item_header .item_category{
+  margin: 1em 0;
+}
+.time_news {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: #13afe4;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin-bottom: 1rem;
+}
+  .time_news p {
+      color: #ffffff;
+      /*ここは特にtranslate使わなくてもうまくいった*/
+  }
+  .time_news_p {
+      margin: .25em .25em;
+      font-size: 1.5em;
+      border-bottom: 1px solid #fff;
+      /* underlineだと数字の幅しか線が描画されないので、border-bottomを使う
+      その時に丸の幅めいっぱいにはならないように左右にmarginをあててる*/
+  }
+.item_content p{
+  margin-bottom: 1em;
+}
+.news_img{
+  width: 100%;  /*widthとheight両方を指定すると縦横比が崩れるのでここでは幅のみ*/
+  margin-bottom: 1em;
 }
 
-/*menu_body*/
-.div_menu {
-    background: #626063 url(../img/menu-bg.jpg);
-    background-repeat: no-repeat;
-    background-blend-mode: screen;
-    background-size: 100% 100vh;
+.side_colomns h3{
+  font-size: 1.3em;
+  padding: .25em 0;
+  border-bottom: 2px solid #0bd;
+  margin-bottom: .75rem;
 }
-/*smart phone*/
-    .div_menu {
-        height: 100vh;
-    }
-    .menu_h2 {
-        margin-top: 50px;
-        font-size: 1.8rem;
-    }
-    .menu_p {
-        text-align: center;
-        margin: 50px 15px;
-    }
-    .menu_p p {
-        text-align: left;
-    }
-    .picture_container img {
-        width: 350px;
-    }
-/*PC*/
-@media (min-width: 415px) {
-    .div_menu, .menu_h2, .menu_p {
-        height: 100vh;
-        width: 100vw;
-    }
-    .menu_h2 {
-        padding: 20px;
-        margin-top: 55px;
-        text-align: center;
-        font-size: 3.5rem;
-    }
-    .menu_p {
-        width: 460px;
-        text-align: center;
-        margin: 0;
-        border: 0;
-        /*word-wrap: normal;*/
-    }
+.side_colomns ul{
+  margin-bottom: 3rem;
+  margin-top: -.75rem;
+}
+.side_colomns li{
+  border-bottom: 1px solid #3f312b;
+}
+.side_colomns li a{
+  text-decoration: none;
+  display: block;
+  padding: .75em 0;
+}
+.side_colomns > div{
+  padding-bottom: .75rem;
+}
+
+@media ( min-width : 415px ) {
+  .all_colomns {
+      display: flex;
+      justify-content: space-between;
+      /*main_clomnsとside_clomnsを横並びにかつ左右にふりわけるためのflexとspace-between*/
+  }
+  .main_colomns{
+    flex-basis: 70%;
+    margin-bottom: 0;
+    /*pxではなく%にすることで、all_colomnsの幅を変えてもここをいじらなくてよくなる*/
+  }
+  .side_colomns{
+    flex-basis: 23%;
+    /*同じく%で*/
+  }
+  .time_news{
+    float: left;
+    margin-right: 1rem;
+    /*pcでは青丸の右にタイトルがあるので素直にfloatで*/
+  }
+  .item_header h1{
+    padding-top: .5rem;
+  }
+}
+
+
+/*menu---------------------------------------*/
+  /*menu_body*/
+  .global_header_menu {
+      background-image:url(../img/menu-bg.jpg);
+      /* .global_headerでサイズや背景に間することは指定しているのでここでは画像urlを指定するだけですむ*/
+  }
+  .picture_container figure{
+    margin-bottom: 3rem;
+  }
+  .picture_container img{
+    width: 100%;
+    margin-bottom: .5rem;
+  }
+
+  @media (min-width:415px){
+    /*gridはよく知らなかったんだけど意外と簡単にまとめることができるみたい*/
     .picture_container {
         display: grid;
         grid-template-areas:
-            "a a b"
-            "a a c"
-            "d e f"
-            "g h i";
-        grid-template-columns: 500px 500px 500px;
-        grid-template-rows: 300px 300px 300px;
-        grid-gap: 50px;
-        height: 800px;
+            "a a ."
+            "a a ."
+            ". . ."
+            ". . .";
+          /* 名前が必要なところだけaと名前をつけて、名前がいらない共通の部分は「.」とか「...」とかでいいみたい*/
+        grid-template-columns: 32% 32% 32%; /*ここもpxだと最大幅の50remと辻褄があわなくなるので、親の単位が変わってもそのままでいいように%で指定*/
+        grid-gap: 2%;
+        margin-bottom: 3rem;  /*なぜかgrid-gapの分だけ下のpaddingが食われてしまうのでしかたなくmargin-bottomをあてる */
     }
-    .picture_a {
-        grid-area: a;
-    }
-    .picture_b {
-        grid-area: b;
-    }
-    .picture_c {
-        grid-area: c;
-    }
-    .picture_d {
-        grid-area: d;
-    }
-    .picture_e {
-        grid-area: e;
-    }
-    .picture_f {
-        grid-area: f;
-    }
-    .picture_g {
-        grid-area: g;
-    }
-    .picture_h {
-        grid-area: h;
-    }
-    .picture_i {
-        grid-area: i;
-    }
-}
+    .picture_container figure{
+      /* figureは基本は共通化する*/
+      margin-bottom: 0;
+      display: flex;  /* 中のimgを目一杯伸ばしてcaptionを下に置くためにflex */
+      flex-direction: column; /* imgとcapを上下に配置 */
+      justify-content: space-between; /*複数の子要素を左右にふって残りは均等配置（ここではimgとcapだけなので上下にふりわけられる）*/
 
-/*contact_body*/
-.div_contact {
-    background: #626063 url(../img/contact-bg.jpg);
-    background-repeat: no-repeat;
-    background-blend-mode: screen;
-    background-size: 100% 100vh;
-}
-/*smart phone*/
-    .div_contact {
-    height: 100vh;
     }
-    .contact_h2{
-    margin: 50px 0;
-    font-size: 1.8rem;
+    .picture_container figure:first-of-type{
+      /* 「a」にわりあてる必要があるのは「.picture_a」というクラス名が大事なのではなく、「最初のfigure」が「a」に割り当てられれば良いので:first-of-typeを使う
+      これで例えばcmsなんかで記事が更新されても、クラス名は必要なく常に最初のfigureに適用される*/
+      grid-area: a;
     }
-/*PC*/
-@media (min-width: 415px) {
-    .div_contact {
-        width: 100vw;
-        height: 80vh;
+    .picture_container figure img{
+      flex-grow: 1; /* flexにしたfigureの中でimgが縦いっぱいに伸びるように*/
+      object-fit: cover;  /*これは、「.」がふたつ縦に並ぶと「a」の高さと合わないので、imgの高さが伸び縮みすることを利用して高さに合わせてimgが拡大縮小するようにしてる*/
     }
-    .contact_h2 {
-        top: 150px;
-        right: 0;
-        bottom: 0;
-        left: 200px;
-        margin: 0;
+    .picture_container figure figcaption{
+      font-size: .8em;
+    }
+  }
+
+
+/*  contact--------------------------------*/
+  .global_header_contact{
+    background-image:url(../img/contact-bg.jpg);
+    background-position: 80% center; /* center centerだと切り抜かれる場所がイマイチかなと思ったので調整 */
+  }
+  .global_header_contact hgroup{
+    flex-grow: 0; /*このページでは下のフォームを伸ばして、このhgroupは伸ばさないのでflex-growを0に*/
+    margin-top: 1.5em;  /*そうするとnavとくっついちゃうので上マージンを指定*/
+  }
+  .global_header_contact hgroup h2{
+    width: 100%;  /* 100%を指定しないと左寄せできない*/
+    max-width: 50rem; /* ただし、最大幅は決まっているので、その中で左寄せになる*/
+  }
+  .div_contact{
+    flex-grow: 1; /*headerの中で高さが伸びるように*/
+    display: flex;  /*ほんとはここにflexはいらないはずなんだけど、safariのバグでflexの子要素全部にflexを書かないと孫以下の要素が伸びない*/
+    flex-direction: column;
+    justify-content: space-between;
+    margin:2em 0;
+  }
+  .contact_form{
+    flex-grow: 1;
+    height: 100%;
+    font-size: .8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .contact_form dl{
+    flex-grow: 1;
+    display: flex;  /*textarea部分を可変にするためにflex*/
+    flex-direction: column;
+    height:100%;
+  }
+  .contact_form dt{
+    margin-bottom: .25em;
+  }
+  .contact_form dd{
+    margin-bottom: 1em;
+  }
+  .form_textarea{
+    flex-grow: 1; /*これで上下の伸び縮みするように*/
+    height: 100%;
+    display: flex;  /*ほんとはコレ不要だけどsafariのバグ対策*/
+  }
+  .contact_form .form_submit{
+    margin-bottom: 0;
+  }
+  .contact_form input,
+  .contact_form textarea{
+    /*似たものはまとめて指定*/
+    background: rgba(255,255,255,.5);
+    border-radius: .25em;
+    padding:.5em;
+    width:100%;
+  }
+  .contact_form textarea{
+    display: block;
+    flex-grow: 1;
+  }
+  .form_submit input{
+    background: #13afe4;
+    color:#fff;
+  }
+
+  /*このへんは素直に組む感じかなー*/
+  .map .information{
+    margin-bottom: 1rem;
+  }
+  .map h1{
+    font-size: 1.3em;
+    padding: .25em 0;
+    border-bottom: 2px solid #0bd;
+    margin-bottom: .75rem;
+  }
+  .map dl{
+    font-size: .8em;
+  }
+  .map dt{
+    float: left;
+    clear: left;
+  }
+  .map dd{
+  }
+  .map iframe{
+    width: 100%;
+    height:40vh;
+    margin-bottom: 3rem;
+  }
+  .section_sns{
+    background: rgb(251,247,240);
+    padding: 1rem;
+    margin-left: -1rem; /*ここで、mainで左右にとった余白をマイナスマージンで打ち消して、背景のベージを画面いっぱいに広げる
+    この編は共通化させといて例外だけ別に指定する、というやりかた*/
+    margin-right: -1rem;
+  }
+  .inner_sns{
+    margin-bottom: 3rem;
+  }
+  .inner_sns h1{
+    font-size: 1.5rem;
+    padding: .25em 0;
+    border-bottom: 2px solid #0bd;
+    margin-bottom: .75rem;
+  }
+  .inner_sns iframe,
+  .inner_sns #facebook span,
+  .inner_sns #facebook{
+    width: 100%;  /*ここがくせもので、htmlに幅は記述しない方がいいみたい。高さはhtmlの指定によって内容が変わるみたいなので高さだけhtmlに書くというカタチにした*/
+  }
+
+
+  @media (min-width: 415px) {
+      .contact_h2{
         text-align: left;
-    }
-    .contact_form {
-        top: 250px;
-        right: 0;
-        bottom: 0;
-        left: 200px;
-        margin: 0;
-        text-align: left;
-    }
-    .text_contact, .email_contact {
-        text-align: center;
-        display: block;
-        padding: 5px 5px;
-        margin: 5px 0;
-        width: 300px; height: 40px;
-        background-blend-mode: screen;
-        background-color: transparent;
-        border: solid 1px #ffffff;
-        border-radius: 10px;
-    }
-    textarea {
-        text-align: center;
-        display: block;
-        padding: 5px 5px;
-        margin: 5px 0;
-        width: 500px; height: 130px;
-        background-blend-mode: screen;
-        background-color: transparent;
-        border: solid 1px #ffffff;
-        border-radius: 10px;
-    }
-    .submit_0 {
-        display: block;
-        margin-left: 150px;
-        font-size: 20px;
-        cursor: pointer;
-        background-color: #13afe4;
-        color: #ffffff;
-        border-radius: 5px;
-    }
-    .submit_0:hover {
-        background-color: #1099c7;
-    }
-    .map {
+        /*50remの最大幅の中で左に寄せる*/
+      }
+      .div_contact{
         width: 100%;
-        height: 100%;
-    }
-    .map iframe {
-        top: 50px;
-        left: 50px;
-        width: 100%;
-        height: 100%;
-        padding-left: 75%; /* = height(高さ) ÷ width(横) × 100 */
-    }
-}
+        max-width: 50rem; /*フォームも最大幅を超えないように*/
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .contact_form{
+        width:30rem;  /*最大幅の中で左に寄せる*/
+      }
+      .contact_form input{
+        width:60%;  /*formの中で幅の狭い部分*/
+      }
+
+      .map{
+        display: flex;  /*infomationとiframeを横並びにさせる*/
+        justify-content: space-between; /*infoとiframeを左右に配置*/
+      }
+      .map .information{
+        flex-basis: 30%;  /*この30%とiframeの65%を100%から引いた、5%がふたつの間の余白になる*/
+      }
+      .map iframe{
+        flex-basis: 65%;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+
+      .section_sns{
+        display: flex;  /* inner_snsを左右均等配置するためにflex*/
+        justify-content: center;  /*3つのインナーを中央に集める*/
+      }
+      .section_sns .inner_sns{
+        flex-basis: calc(50rem / 3 - .7rem);  /*インナーの幅は最大幅50remの1／3、からそれぞれの余白を引いた数値*/
+        margin-right: 1rem; /*それぞれのインナーに余白を作る*/
+      }
+      .section_sns .inner_sns:last-of-type{
+        margin-right: 0;  /*でも一番右は右余白は不要なのでlast-of-typeの右マージンを0に*/
+      }
+  }

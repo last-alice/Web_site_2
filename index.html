@@ -18,19 +18,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="div_index">
-        <header>
-            <img class="imglogo" src="img/index.png" alt="イメージロゴ" onclick="location.href='index.html'">
-            <ul>
-                <a href="news.html"><li>NEWS</li></a>
-                <a href="menu.html"><li>MENU</li></a>
-                <a href="contact.html"><li>CONTACT</li></a>
-            </ul>
+    <div class="div_index"> <!--このページは構成が特殊なのでbody直下にこのdivがあってもよい（一応なくても組めるけど） -->
+        <header class="global_header global_header_index">
+              <nav class="global_nav">  <!-- .nav.global_menuとして全ページ共通化 -->
+                <!--h1要素は必要なのでイメージロゴ的なものはh1要素として強い扱いにするといいかな-->
+                <h1>
+                  <!-- リンクは素直にaタグで -->
+                  <a href="/">  <!-- ルートへのリンクは「/」だけでいいよ-->
+                    <img class="imglogo" src="img/index.png" alt="GFTD.CAFE TOPへ" />
+                  </a>
+                </h1>
+                <ul>
+                    <!-- ul要素直下はliじゃないといけないのでliとaの関係を逆転-->
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="menu.html">MENU</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+              </nav>
         </header>
-        <main>
-            <h2 class="index_h2">We'll Make Your Day</h2>
-            <p class="index_p">ギフテッドなカフェで癒されてみませんか？発達障害に効く食材で脳の中からリフレッシュ。</p>
-            <button class="button_0" type="button" tabindex="0" role="button" onclick="location.href='menu.html'" style="width: 200px;height: 50px;">メニューを見る</button>
+
+
+        <main>  <!-- このページは他のページと見た目がだいぶ変わるけど、htmlの構造的には他のページと同じように、headerとmainで分離する -->
+            <!-- 今はh1要素がページ内に複数あってもいいので、違うブロックではその中で大見出しになるものはh1がいいかな-->
+            <h2 class="page_title index_h2">We'll Make Your Day</h2>
+            <p class="summary index_p">ギフテッドなカフェで癒されてみませんか？発達障害に効く食材で脳の中からリフレッシュ。</p>
+            <!-- リンクは素直にaタグ使うといいよ-->
+            <a class="button_0" href="menu.html">メニューを見る</a>
         </main>
     </div>
 </body>

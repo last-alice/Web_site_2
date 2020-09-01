@@ -18,49 +18,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="div_news">
-            <img class="imglogo" src="img/index.png" alt="イメージロゴ" onclick="location.href='index.html'">
+    <header class="global_header global_header_news">
+          <nav class="global_nav">  <!-- .nav.global_menuとして全ページ共通化 -->
+            <!--h1要素は必要なのでイメージロゴ的なものはh1要素として強い扱いにするといいかな-->
+            <h1>
+              <!-- リンクは素直にaタグで -->
+              <a href="/">  <!-- ルートへのリンクは「/」だけでいいよ-->
+                <img class="imglogo" src="img/index.png" alt="GFTD.CAFE TOPへ" />
+              </a>
+            </h1>
             <ul>
-                <a href="news.html"><li>NEWS</li></a>
-                <a href="menu.html"><li>MENU</li></a>
-                <a href="contact.html"><li>CONTACT</li></a>
+                <!-- ul要素直下はliじゃないといけないのでliとaの関係を逆転-->
+                <li><a href="news.html">NEWS</a></li>
+                <li><a href="menu.html">MENU</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
             </ul>
-                <h2 class="news_h2">NEWS</h2>
-        </div>
+          </nav>
+
+          <hgroup>  <!-- このページはh2しかないけど、他のページと構造的に同じにするためにhgroupで囲う -->
+            <h2 class="page_title news_h2">NEWS</h2>
+          </hgroup>
     </header>
+
     <main>
-    <article class="all_colomns">
-        <section class="main_colomns">
-                <div class="time_news">
-                    <p class="time_news_p"><small>04/01</small></p><p>2019</p>
-                </div>
-                <h3 class="news_h3">店内開発スペースが新しくなりました。</h3>
-                <p>カテゴリー：お店の紹介</p>
-                <img class="news_img" src="img/wall.jpg" alt="ノートパソコンのキーボードを打つ女性">
-                <div class="news_p">
+      <div class="main_inner all_colomns">  <!-- main直下のブロック部分として共通化するために.main_innerとする このブロックでpcでの最大幅を決める役割も持たせる-->
+        <section class="main_colomns"><!--sectionとasideでhtmlを分離。こちらは左側-->
+          <!--記事ひとつはarticleで囲う-->
+          <article class="item news_item"> <!-- articleは記事ひとつひとつでその親のsectionでasideと分離したからmain_columnsの名前は一考かも-->
+            <header class="item_header">  <!-- 記事のうち、見出し的な要素と本文的な要素を意味的にもスタイル的にも分離するためheaderで囲う -->
+              <div class="time_news">
+                  <p class="time_news_p">04/01</p><p>2019</p> <!-- htmlで装飾するタグは使わない -->
+              </div>
+              <h1 class="news_h3">店内開発スペースが新しくなりました。</h1> <!--記事のタイトル見出しなのでh1にする -->
+              <p class="item_category">カテゴリー：お店の紹介</p>  <!-- 個人的にはクラスは使わなくても組めるけど、わかりやすくするためにクラス名つけたよ -->
+            </header>
+            <div class="item_content">  <!-- こちらは本文的な意味合いの要素 -->
+              <img class="news_img" src="img/wall.jpg" alt="ノートパソコンのキーボードを打つ女性">
+              <div class="news_p">
                 <p>脳に刺激を与える食品を提供する、GFTD CAFE。刺激のある食材を利用したメニューが特徴です。苦いブレンドコーヒーと辛いジャンクフードで脳の内側から刺激されてください。脳に刺激を与える食品を提供する、GFTD CAFE。刺激のある食材を利用したメニューが特徴です。苦いブレンドコーヒーと辛いジャンクフードで脳の内側から刺激されてください。</p>
                 <p>脳に刺激を与える食品を提供する、GFTD CAFE。刺激のある食材を利用したメニューが特徴です。苦いブレンドコーヒーと辛いジャンクフードで脳の内側から刺激されてください。脳に刺激を与える食品を提供する、GFTD CAFE。刺激のある食材を利用したメニューが特徴です。苦いブレンドコーヒーと辛いジャンクフードで脳の内側から刺激されてください。脳に刺激を与える食品を提供する、GFTD CAFE。刺激のある食材を利用したメニューが特徴です。苦いブレンドコーヒーと辛いジャンクフードで脳の内側から刺激されてください。</p>
                 <p>脳に刺激を与える食品を提供する、GFTD CAFE。</p>
-                </div>
+              </div>
+            </div>
+          </article>
+
         </section>
-        <section class="side_colomns">
-            <h3>カテゴリー</h3>
-            <ul>
-                <a href=""><li>お店の紹介</li></a>
-                <a href=""><li>期間限定メニュー</li></a>
-                <a href=""><li>イベント</li></a>
-                <a href=""><li>お客様との会話</li></a>
-            </ul>
-            <h3>このお店について</h3>
-            <ul>
-                <li>脳に刺激を与える食品を提供する、GFTD CAFE。刺激のある食材を利用したメニューが特徴です。苦いブレンドコーヒーと辛いジャンクフードで脳の内側から刺激されてください。</li>
-            </ul>
-        </section>
-    </article>
+
+        <aside class="side_colomns">  <!-- こちらは右側 意味的にasideを使うといいかな-->
+          <h3>カテゴリー</h3>  <!-- ここもasideの中で一番大きな見出しだからほんとはh1でもいいかも -->
+          <ul>
+            <!--ここもliとaの関係が逆だから修正-->
+              <li><a href="">お店の紹介</a></li>
+              <li><a href="">期間限定メニュー</a></li>
+              <li><a href="">イベント</a></li>
+              <li><a href="">お客様との会話</a></li>
+          </ul>
+          <h3>このお店について</h3>
+          <!--この文章は意味的にリストではないから普通にpタグでいいかな そしてdivにulと同じスタイルを記述する-->
+          <div>
+              <p>脳に刺激を与える食品を提供する、GFTD CAFE。刺激のある食材を利用したメニューが特徴です。苦いブレンドコーヒーと辛いジャンクフードで脳の内側から刺激されてください。</p>
+          </div>
+        </aside>
+
+      </div>
+
     </main>
+
+
     <footer>
-        <p><small>&copy; 2019 GFTD WORKS</small></p>
+        <!--htmlで装飾を示すsmallとかは使わないほうがいいかな-->
+        <p>&copy; 2019 GFTD WORKS</p>
     </footer>
 </body>
 </html>
